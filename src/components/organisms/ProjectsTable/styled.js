@@ -19,4 +19,5 @@ export const TableColActions = styled(TableCol)`
   button {
     margin-right: 1rem;
   }
+  min-width: 20rem;
 `

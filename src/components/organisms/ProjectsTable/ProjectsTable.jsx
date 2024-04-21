@@ -9,12 +9,11 @@ import { mockProjects } from './mockProjects';
 import { Table, TableHead, TableCol, TableColActions } from './styled';
 import NotifierContext from '../../../context/NotifierContext';
 
-const ProjectsTable = () => {
+const ProjectsTable = ({projects}) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { setMessage, setErrorMessage } = useContext(NotifierContext)
 
   const [projectToDelete, setProjectToDelete] = useState(null);
-  const [mockProjectsState, setMockProjectsState] = useState([...mockProjects]);
 
   const handleDeleteButton = (project) => {
     setProjectToDelete(project);
@@ -28,10 +27,7 @@ const ProjectsTable = () => {
   }
 
   const handleDeleteConfirmButton = () => {
-    const updatedProjects = mockProjectsState.filter(project => project.id !== projectToDelete.id);
-    setMockProjectsState(updatedProjects);
     
-    setProjectToDelete(null);
     setMessage('Проект удален');
     setShowDeleteModal(false);
   }
@@ -49,7 +45,7 @@ const ProjectsTable = () => {
       </thead>
 
       <tbody>
-        {mockProjectsState.map(({ id, name, description }) => {
+        {projects.map(({ id, name, description }) => {
           return (
             <tr key={id}>
               <TableCol>{id}</TableCol>
